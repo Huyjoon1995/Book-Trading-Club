@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  .container
+    h1 Requests
+    p.lead Below is all the person want to ask for your book. Only one person can do the trade. The rest will be rejected
+    hr
+    if theirs.length > 0
+      each book, i in theirs
+        each item in book.requestedBy
+          if item.status == 'is pending'
+            .row
+              .col-xs-6
+                p= item.user + "'s request for " + book.title + " " + item.status
+              .col-xs-1
+                a.btn.btn-success.btn-sm(href="/books/accept?id=#{book._id}&user=#{item.user}", role="button") Accept
+              .col-xs-1
+                a.btn.btn-danger.btn-sm(href="/books/reject?id=#{book._id}&user=#{item.user}", role="button") Reject
+    else
+      p Nobody has requested any of your books yet.
+    h1 Your Requests
+    p.lead This is a list of the requests you have made. You can view the status of your request.
+    hr
+    if mine.length > 0
+      each book, i in mine
+        each item in book.requestedBy
+          - var requested = (item.user == user.username)
+          if requested
+            p= "Your request for " + book.title + " " + item.status
+    else
+      p You haven't requested any books yet.
+    h2 Messages
+    p.lead If someone has accepted your request, you'll get their contact info here.
+    hr
+    each note, i in notes.messages
+      p= note

@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  .container
+    h1
+      i.fa.fa-address-card-o(aria-hidden='true')
+      | #{userInfo.username}'s Profile
+    p Below is all of #{userInfo.username}'s information. You can edit and update your information.
+    hr
+    .profile.col-xs-5
+      p.info Display Name: #{userInfo.username}
+      p.info User's Email: #{userInfo.email}
+      p.info User's Name : #{userInfo.fullName}
+      p.info User's City: #{userInfo.city}
+      p.info User's State: #{userInfo.state}
+      p.info User's Favorite Quote: #{userInfo.favoriteQuote}
+    .update.col-xs-6
+      p.title Update your profile
+      form(method='post', action='/users/profile')
+        .form-group
+            label Your Full Name
+            input.form-control(name='full', type='text', placeholder='e.g. Will Smith', autocomplete="off")
+        .form-group
+            label Your Email
+            input.form-control(name='email', type='text', placeholder='willsmith@gmail.com', autocomplete="off")
+        .form-group
+            label Your City
+            input.form-control(name='city', type='text', placeholder='e.g. Seattle', autocomplete="off")
+        .form-group
+            label Your State or Country
+            input.form-control(name='state', type='text', placeholder='e.g. WA', autocomplete="off")
+        .form-group
+            label Your Motto
+            input.form-control(name='quote', type='text', placeholder="'Life is a long path to a goal. Drop your heavy luggage and enjoy walking with your hands empty.'", autocomplete="off")
+        input.btn.btn-default(name='submit', type='submit', value='Update your profile', style="margin-bottom: 5px;")

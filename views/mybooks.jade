@@ -1,0 +1,37 @@
+extends layout
+
+block content
+  .container
+    h1 Hello User
+    p.lead Bellow is all of your books.
+    hr
+    .row
+      if books
+        each book, i in books
+          .col-xs-6
+            p.lead #{book.title}
+            a.btn.btn-danger.btn-sm(href="/books/delete/#{book._id}", role="button", style="margin-left:3px;") Delete Book
+    h1 Add more books to your collection
+    p.lead Below is a search bar for you to type the book name. Start to search for your favorite books. All board on train
+    form(method='post', action='/books/mybooks')
+      .form-group
+          label Book's title
+          input.form-control(name="title", type="text", placeholder="Book Title, e.g. Cracking the coding interview", autocomplete="off")
+      input.btn.btn-primary(name="submit", type="submit", value="Search")
+    div.row
+      if results
+        each result, i in results
+          .col-xs-12.col-sm-6.col-md-4
+            .thumbnail
+              h3.text-center #{result.title}
+              img(src="#{result.thumbnail}", alt="#{result.title}")
+              .caption
+                p.lead Authors(s): #{result.authors}
+              form(method='post', action='/books/addbook')
+                input(type="hidden", value='#{result.title}',name ='title')
+                input(type="hidden", value='#{result.authors}', name='authors')
+                input(type='hidden', value='#{result.pageCount}', name='pageCount')
+                input(type='hidden', value='#{result.thumbnail}', name='thumbnail')
+                input.btn.btn-primary(name='submit', type='submit', value='Add Collection')
+        else
+            p.lead Sorry We couldn't find a book with that title

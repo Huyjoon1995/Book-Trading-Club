@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  .jumbotron
+    .container
+      h1.intro Never Stop Reading
+      p.intro
+        | Reading is dreamming with open eyes. Keep calm and read more book.
+      p
+        a.btn.btn-primary.btn-lg(href="/users/register", role="button") Sign Up Now &#187;
+        a.btn.btn-default.btn-lg(href="/books/allbooks", role="button", id="indexbtn") View Books &#187;
+  .container
+    .row
+      .col-md-4
+        h2 Share
+        p
+          | You can share your book with anybody you like. Entry data doesn't take much time, all you need to do is search the title and anybody can see what you have to offer
+      .col-md-4
+        h2 Request
+        p
+          | See what the community has to offer you and check for the book that you like.
+      .col-md-4
+        h2 Manage
+        p
+          | You can decide to accept or decline the request from other peoples. Or simply leave a comment in there
+    hr
+    footer
+      p.lead.text-center &#169; 2017 Huy Tran
+    .media
+      h2.lead Follow me at
+      a(href='https://github.com/Huyjoon1995')
+        i.fa.fa-github(aria-hidden='true')
+      a(href="https://www.freecodecamp.org/huyjoon1995")
+        i.fa.fa-free-code-camp(aria-hidden='true')
+      a(href="https://www.linkedin.com/in/huy-tran-5166aa143/")
+        i.fa.fa-linkedin-square(aria-hidden='true')

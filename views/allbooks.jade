@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  .container
+    h1 All Books
+    p.lead Browse the community and request their books!
+    hr
+    .row
+    if books.length > 0
+      each book, i in books
+        .col-xs-12.col-sm-6.col-md-4
+          .thumbnail
+            h3 #{book.title}
+            img(src="#{book.thumbnail}", alt="#{book.title}")
+            .caption
+              p Author(s): #{book.authors}
+              if user
+                - var list = book.requestedBy
+                if list.length > 0
+                  each item in list
+                    if (item.user == user.username)
+                      p Request already sent
+                    else
+                      form(method="post", action="/books/requests", enctype="multipart/form-data")
+                          input(type="hidden", value="#{book._id}", name="id")
+                          if book.isAvailable
+                            input.btn.btn-primary(name="submit", type="submit", value="Request Book")
+                          else
+                            input.btn.btn-primary(name="submit", type="submit", value="Request Book", disabled="disabled")
+                else
+                  form(method="post", action="/books/requests", enctype="multipart/form-data")
+                      input(type="hidden", value="#{book._id}", name="id")
+                      input.btn.btn-primary(name="submit", type="submit", value="Request Book")
+    else
+      p The other registered users haven't added books yet.
